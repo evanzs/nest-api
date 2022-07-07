@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/evanzs/nest-api/issues"
   },
-  "homepage": "https://github.com/evanzs/nest-api#readme"
+  "homepage": "https://github.com/evanzs/nest-api#readme",
+  "dependencies": {
+    "git-commit-msg-linter": "^4.1.3"
+  }
 }
