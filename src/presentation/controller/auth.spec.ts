@@ -47,7 +47,7 @@ describe("AuthController ", () => {
     expect(httpResponse.body).toEqual(new MissingParamError("password"));
   });
 
-  test("Should return 400 if no password", () => {
+  test("Should return 400 if no password confirmation", () => {
     const sut = new AuthController();
     const httpRequest = {
       body: {
