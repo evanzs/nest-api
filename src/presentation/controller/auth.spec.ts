@@ -1,4 +1,4 @@
-import { EmailValidator } from "../protocols/email-validator";
+import { EmailValidator } from "../protocols";
 import { AuthController } from "./authController";
 import { InvalidParamsError, MissingParamError, ServerError } from "./errors";
 interface SutTypes {

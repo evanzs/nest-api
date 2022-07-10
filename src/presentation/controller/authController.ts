@@ -1,6 +1,5 @@
 import { badRequest, InternalError } from "../helpers/http-helper";
-import { Controller } from "../protocols/controller";
-import { EmailValidator } from "../protocols/email-validator";
+import { Controller, EmailValidator } from "../protocols";
 import { HttpRequest, HttpResponse } from "../protocols/http";
 import { InvalidParamsError, MissingParamError } from "./errors";
 
