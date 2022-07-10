@@ -1,9 +1,6 @@
 import { EmailValidator } from "../protocols/email-validator";
 import { AuthController } from "./authController";
-import { InvalidParamsError } from "./errors/invalid-params-error";
-import { MissingParamError } from "./errors/missing-param-error";
-import { ServerError } from "./errors/server-error";
-
+import { InvalidParamsError, MissingParamError, ServerError } from "./errors";
 interface SutTypes {
   sut: AuthController;
   emailValidadorStub: EmailValidator;

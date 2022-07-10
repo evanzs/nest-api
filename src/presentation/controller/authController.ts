@@ -2,9 +2,7 @@ import { badRequest, InternalError } from "../helpers/http-helper";
 import { Controller } from "../protocols/controller";
 import { EmailValidator } from "../protocols/email-validator";
 import { HttpRequest, HttpResponse } from "../protocols/http";
-import { InvalidParamsError } from "./errors/invalid-params-error";
-import { MissingParamError } from "./errors/missing-param-error";
-import { ServerError } from "./errors/server-error";
+import { InvalidParamsError, MissingParamError } from "./errors";
 
 export class AuthController implements Controller {
   private readonly _emailValidator: EmailValidator;
@@ -30,7 +28,7 @@ export class AuthController implements Controller {
 
       if (!isValidEmail) return badRequest(new InvalidParamsError("email"));
     } catch (error) {
-      return InternalError(new ServerError());
+      return InternalError();
     }
   }
 }
