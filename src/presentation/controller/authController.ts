@@ -17,17 +17,18 @@ export class AuthController implements Controller {
         "passwordConfirmation",
       ];
 
+      const { email, password, passwordConfirmation } = httpRequest.body;
       for (const field of fieldsRequired) {
         if (!httpRequest.body[field]) {
           return badRequest(new MissingParamError(field));
         }
       }
 
-      const isValidEmail = this._emailValidator.isValid(httpRequest.body.email);
+      const isValidEmail = this._emailValidator.isValid(email);
 
       if (!isValidEmail) return badRequest(new InvalidParamsError("email"));
 
-      if (httpRequest.body.password !== httpRequest.body.passwordConfirmation) {
+      if (password !== passwordConfirmation) {
         return badRequest(
           new InvalidParamsError(
             "password confirmation must be equal password."
