@@ -149,4 +149,42 @@ describe("AuthController ", () => {
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual(new ServerError());
   });
+  test("Should return 500 if EmailValidator  with jest mock", () => {
+    const { sut, emailValidadorStub } = makeSut();
+
+    jest.spyOn(emailValidadorStub, "isValid").mockImplementationOnce(() => {
+      throw new Error();
+    });
+    const httpRequest = {
+      body: {
+        name: "evandro",
+        email: "evandro@gmail.com",
+        password: "evandro123",
+        passwordConfirmation: "evandro123",
+      },
+    };
+
+    const httpResponse = sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual(new ServerError());
+  });
+
+  test("Should return 400 if passwordConfirmation fails", () => {
+    const { sut } = makeSut();
+
+    const httpRequest = {
+      body: {
+        name: "evandro",
+        email: "evandro@gmail.com",
+        password: "evandro123",
+        passwordConfirmation: "evandro12",
+      },
+    };
+
+    const httpResponse = sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(
+      new InvalidParamsError("password confirmation must be equal password.")
+    );
+  });
 });

@@ -26,6 +26,14 @@ export class AuthController implements Controller {
       const isValidEmail = this._emailValidator.isValid(httpRequest.body.email);
 
       if (!isValidEmail) return badRequest(new InvalidParamsError("email"));
+
+      if (httpRequest.body.password !== httpRequest.body.passwordConfirmation) {
+        return badRequest(
+          new InvalidParamsError(
+            "password confirmation must be equal password."
+          )
+        );
+      }
     } catch (error) {
       return InternalError();
     }
