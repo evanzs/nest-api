@@ -1,4 +1,4 @@
-import { badRequest } from "../helpers/http-helper";
+import { badRequest, InternalError } from "../helpers/http-helper";
 import { Controller } from "../protocols/controller";
 import { EmailValidator } from "../protocols/email-validator";
 import { HttpRequest, HttpResponse } from "../protocols/http";
@@ -30,7 +30,7 @@ export class AuthController implements Controller {
 
       if (!isValidEmail) return badRequest(new InvalidParamsError("email"));
     } catch (error) {
-      return { statusCode: 500, body: new ServerError() };
+      return InternalError(new ServerError());
     }
   }
 }
